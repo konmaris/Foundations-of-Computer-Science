@@ -132,6 +132,7 @@ int main() {
     printf("\nTotal operations took: %Lf seconds", totalTime);
 
     printf("\n\n");
+    free(arr);
     return 0;
 }
 
