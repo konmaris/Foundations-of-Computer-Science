@@ -51,88 +51,92 @@ int main() {
 
     long double totalTime = 0.0;
 
-    printf("Enter number of elements to be generated: ");
-    scanf("%lld", &N);
-
     arr = calloc(N, sizeof(int64_t));
 
-    Nhigh = N - 1;
-
-    clock_gettime(CLOCK_REALTIME, &fillBegin);
-
-        fillRandom(arr, (N * 2));
-
-    clock_gettime(CLOCK_REALTIME, &fillEnd);
-
-    //printf("Elements before sorting: \n");
-    //printArr(arr);
-
-    clock_gettime(CLOCK_REALTIME, &sortBegin);
-    
-        quickSort(arr, 0, N - 1);
-
-    clock_gettime(CLOCK_REALTIME, &sortEnd);
-
-    printf("\n\n\nElements after sorting: \n");
-    printArr(arr);
-
-    printf("\n\nEnter number to search: ");
-    scanf("%lld", &target);
-
-    clock_gettime(CLOCK_REALTIME, &searchBegin);
-
-        while (Nlow <= Nhigh) {
-            k++;
-            int Nmid = (Nlow + Nhigh) / 2;
-
-            if (target == arr[Nmid]) {
-                target = arr[Nmid];
-                i = Nmid;
-                found = 1; 
-                break;
-            }
-            else if (target < arr[Nmid]) {
-                Nhigh = Nmid - 1;
-            } 
-            else if (target > arr[Nmid]) {
-                Nlow = Nmid + 1;
-            }
-            else {
-                found = 0;
-            }
-        }
-
-    clock_gettime(CLOCK_REALTIME, &searchEnd);
-
-    if (found == 1) {
-        printf("\nTarget element %lld found at index %lld with %lld operations.\n", target, i, k);
+    if (arr == NULL) {
+        printf("\nMemory allocation failed!\n");
+        return -1;
     } 
     else {
-        printf("\nTarget element %lld not found with %lld operations.\n", target, k);
+        Nhigh = N - 1;
+
+        clock_gettime(CLOCK_REALTIME, &fillBegin);
+
+            fillRandom(arr, (N * 2));
+
+        clock_gettime(CLOCK_REALTIME, &fillEnd);
+
+        //printf("Elements before sorting: \n");
+        //printArr(arr);
+
+        clock_gettime(CLOCK_REALTIME, &sortBegin);
+        
+            quickSort(arr, 0, N - 1);
+
+        clock_gettime(CLOCK_REALTIME, &sortEnd);
+
+        printf("\n\n\nElements after sorting: \n");
+        printArr(arr);
+
+        printf("\n\nEnter number to search: ");
+        scanf("%lld", &target);
+
+        clock_gettime(CLOCK_REALTIME, &searchBegin);
+
+            while (Nlow <= Nhigh) {
+                k++;
+                int Nmid = (Nlow + Nhigh) / 2;
+
+                if (target == arr[Nmid]) {
+                    target = arr[Nmid];
+                    i = Nmid;
+                    found = 1; 
+                    break;
+                }
+                else if (target < arr[Nmid]) {
+                    Nhigh = Nmid - 1;
+                } 
+                else if (target > arr[Nmid]) {
+                    Nlow = Nmid + 1;
+                }
+                else {
+                    found = 0;
+                }
+            }
+
+        clock_gettime(CLOCK_REALTIME, &searchEnd);
+
+        if (found == 1) {
+            printf("\nTarget element %lld found at index %lld with %lld operations.\n", target, i, k);
+        } 
+        else {
+            printf("\nTarget element %lld not found with %lld operations.\n", target, k);
+        }
+
+        fillSeconds = fillEnd.tv_sec - fillBegin.tv_sec;
+        fillNanoseconds = fillEnd.tv_nsec - fillBegin.tv_nsec;
+        fillElapsed = fillSeconds + fillNanoseconds*1e-9;
+
+        sortSeconds = sortEnd.tv_sec - sortBegin.tv_sec;
+        sortNanoseconds = sortEnd.tv_nsec - sortBegin.tv_nsec;
+        sortElapsed = sortSeconds + sortNanoseconds*1e-9;
+
+        searchSeconds = searchEnd.tv_sec - searchBegin.tv_sec;
+        searchNanoseconds = searchEnd.tv_nsec - searchBegin.tv_nsec;
+        searchElapsed = searchSeconds + searchNanoseconds*1e-9;
+
+        totalTime = fillElapsed + sortElapsed + searchElapsed;
+
+        printf("\n\nElements sorted with %lld operations.", l);
+        printf("\n\nRandom array fill took: %Lf seconds", fillElapsed);
+        printf("\nArray sort took: %Lf seconds", sortElapsed);
+        printf("\nArray search took: %Lf seconds", searchElapsed);
+        printf("\nTotal operations took: %Lf seconds", totalTime);
+
+        printf("\n\n");
+        free(arr);
     }
 
-    fillSeconds = fillEnd.tv_sec - fillBegin.tv_sec;
-    fillNanoseconds = fillEnd.tv_nsec - fillBegin.tv_nsec;
-    fillElapsed = fillSeconds + fillNanoseconds*1e-9;
-
-    sortSeconds = sortEnd.tv_sec - sortBegin.tv_sec;
-    sortNanoseconds = sortEnd.tv_nsec - sortBegin.tv_nsec;
-    sortElapsed = sortSeconds + sortNanoseconds*1e-9;
-
-    searchSeconds = searchEnd.tv_sec - searchBegin.tv_sec;
-    searchNanoseconds = searchEnd.tv_nsec - searchBegin.tv_nsec;
-    searchElapsed = searchSeconds + searchNanoseconds*1e-9;
-
-    totalTime = fillElapsed + sortElapsed + searchElapsed;
-
-    printf("\n\nElements sorted with %lld operations.", l);
-    printf("\n\nRandom array fill took: %Lf seconds", fillElapsed);
-    printf("\nArray sort took: %Lf seconds", sortElapsed);
-    printf("\nArray search took: %Lf seconds", searchElapsed);
-    printf("\nTotal operations took: %Lf seconds", totalTime);
-
-    printf("\n\n");
-    free(arr);
     return 0;
 }
 
