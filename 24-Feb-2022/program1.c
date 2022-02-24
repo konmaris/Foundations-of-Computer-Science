@@ -29,16 +29,16 @@ int main()
     p_9 = &i_9;
     p_10 = &i_10;
 
-    printf("Integer i_1 has a value of %d and is at memory position %p\n", i_1, &i_1);
-    printf("Integer i_2 has a value of %d and is at memory position %p\n", i_2, &i_2);
-    printf("Integer i_3 has a value of %d and is at memory position %p\n", i_3, &i_3);
-    printf("Integer i_4 has a value of %d and is at memory position %p\n", i_4, &i_4);
-    printf("Integer i_5 has a value of %d and is at memory position %p\n", i_5, &i_5);
-    printf("Integer i_6 has a value of %d and is at memory position %p\n", i_6, &i_6);
-    printf("Integer i_7 has a value of %d and is at memory position %p\n", i_7, &i_7);
-    printf("Integer i_8 has a value of %d and is at memory position %p\n", i_8, &i_8);
-    printf("Integer i_9 has a value of %d and is at memory position %p\n", i_9, &i_9);
-    printf("Integer i_10 has a value of %d and is at memory position %p\n", i_10, &i_10);
+    printf("Integer i_1 has a value of %d and is at memory position %p and its pointer position is %p\n", i_1, p_1, &p_1);
+    printf("Integer i_2 has a value of %d and is at memory position %p and its pointer position is %p\n", i_2, p_2, &p_2);
+    printf("Integer i_3 has a value of %d and is at memory position %p and its pointer position is %p\n", i_3, p_3, &p_3);
+    printf("Integer i_4 has a value of %d and is at memory position %p and its pointer position is %p\n", i_4, p_4, &p_4);
+    printf("Integer i_5 has a value of %d and is at memory position %p and its pointer position is %p\n", i_5, p_5, &p_5);
+    printf("Integer i_6 has a value of %d and is at memory position %p and its pointer position is %p\n", i_6, p_6, &p_6);
+    printf("Integer i_7 has a value of %d and is at memory position %p and its pointer position is %p\n", i_7, p_7, &p_7);
+    printf("Integer i_8 has a value of %d and is at memory position %p and its pointer position is %p\n", i_8, p_8, &p_8);
+    printf("Integer i_9 has a value of %d and is at memory position %p and its pointer position is %p\n", i_9, p_9, &p_9);
+    printf("Integer i_10 has a value of %d and is at memory position %p and its pointer position is %p\n", i_10, p_10, &p_10);
 
     printf("\n");
     return 0;
