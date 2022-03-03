@@ -7,13 +7,12 @@ typedef struct Node
     struct Node *next;
 } node;
 
-void push(node** head, int data);
-void printList(node** head);
+void push(node **head, int data);
+void printList(node **head);
 
 int main()
 {
     // system("clear");
-
 
     node n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, *head;
 
@@ -52,21 +51,21 @@ int main()
     n10.value = 100;
     n10.next = NULL;
 
-    // printf("\n\nNodes: \n");
-    // printf("\n=============================================\n");
-    // printf(" Value    | Current        | Next \n");
-    // printf("----------|----------------|-----------------\n");
-    // printf(" %d       | %p | %p\n", n1.value, &n1, n1.next);
-    // printf(" %d       | %p | %p\n", n2.value, &n2, n2.next);
-    // printf(" %d       | %p | %p\n", n3.value, &n3, n3.next);
-    // printf(" %d      | %p | %p\n", n11.value, &n11, n11.next);
-    // printf(" %d       | %p | %p\n", n4.value, &n4, n4.next);
-    // printf(" %d       | %p | %p\n", n5.value, &n5, n5.next);
-    // printf(" %d       | %p | %p\n", n6.value, &n6, n6.next);
-    // printf(" %d       | %p | %p\n", n7.value, &n7, n7.next);
-    // printf(" %d       | %p | %p\n", n8.value, &n8, n8.next);
-    // printf(" %d       | %p | %p\n", n9.value, &n9, n9.next);
-    // printf(" %d      | %p | %p\n", n10.value, &n10, n10.next);
+    printf("\n\nNodes: \n");
+    printf("\n=============================================\n");
+    printf(" Value    | Current        | Next \n");
+    printf("----------|----------------|-----------------\n");
+    printf(" %d       | %p | %p\n", n1.value, &n1, n1.next);
+    printf(" %d       | %p | %p\n", n2.value, &n2, n2.next);
+    printf(" %d       | %p | %p\n", n3.value, &n3, n3.next);
+    printf(" %d      | %p | %p\n", n11.value, &n11, n11.next);
+    printf(" %d       | %p | %p\n", n4.value, &n4, n4.next);
+    printf(" %d       | %p | %p\n", n5.value, &n5, n5.next);
+    printf(" %d       | %p | %p\n", n6.value, &n6, n6.next);
+    printf(" %d       | %p | %p\n", n7.value, &n7, n7.next);
+    printf(" %d       | %p | %p\n", n8.value, &n8, n8.next);
+    printf(" %d       | %p | %p\n", n9.value, &n9, n9.next);
+    printf(" %d      | %p | %p\n", n10.value, &n10, n10.next);
 
     printList(&head);
 
@@ -77,29 +76,29 @@ int main()
     return 0;
 }
 
-void push(node** head, int data)
+void push(node **head, int data)
 {
-    //pointer because is also new head
-    node *newNode = (node*) malloc(sizeof(node)); //is also new head
+    // pointer because is also new head
+    node *newNode = (node *)malloc(sizeof(node)); // is also new head
 
-    //set new node data to the data parameter
+    // set new node data to the data parameter
     newNode->value = data;
 
-    //set new node next node to the previous head
+    // set new node next node to the previous head
     newNode->next = *head;
-    
-    //set current head to the new node
+
+    // set current head to the new node
     *head = newNode;
 }
 
-void printList(node** head)
+void printList(node **head)
 {
     node *ptr = *head;
     int i = 0;
 
     printf("[\n");
 
-    while(ptr != NULL)
+    while (ptr != NULL)
     {
         printf("  Item %d: %d, %p\n", i, ptr->value, ptr->next);
         ptr = ptr->next;
