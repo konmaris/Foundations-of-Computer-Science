@@ -15,19 +15,29 @@ node *Push(node **head, int val);              // insert at first position
 node *Tail(node **head, int val);              // insert at tail
 node *Insert(node **head, int index, int val); // insert a specific position
 node *Delete(node **head, int index);          // delete at specific position
+int Length(node **head);                       // finds the length of list
+void Reverse(node **head);                     // reverse list
 void DeleteList(node **head);                  // delete the entire list
+node *List(size_t node_count);                 // creates list
 
 void emptyLine(size_t count);
 
 int main()
 {
     system(CLEAR);
+    size_t size = 0;
 
-    node *list = NULL;
+    printf("Enter size of list: ");
+    scanf("%ld", &size);
+
+    emptyLine(1);
+
+    node *list = List(size);
     node *temp = NULL;
 
     int option = 0;
     char delOption = ' ';
+    char revOption = ' ';
 
     int index = 0;
     int value = 0;
@@ -40,7 +50,9 @@ int main()
         printf("4.\tPrint list\n");
         printf("5.\tDelete node\n");
         printf("6.\tDelete list\n");
-        printf("7.\tQuit\n");
+        printf("7.\tReverse list\n");
+        printf("8.\tPrint length\n");
+        printf("9.\tQuit\n");
 
         printf("\nChoose an option: ");
         scanf("%d", &option);
@@ -117,12 +129,40 @@ int main()
             }
             break;
         case 7:
+            printf("Are you sure you want to reverse the list? (y/n): ");
+            scanf(" %c", &revOption);
+            revOption = tolower(revOption);
+            if (revOption == 'y')
+            {
+                emptyLine(1);
+                Reverse(&list);
+                emptyLine(2);
+                break;
+            }
+            else if (revOption == 'n')
+            {
+                emptyLine(1);
+                break;
+            }
+            else
+            {
+                printf("Choose either yes (y/Y) or no (n/N)!");
+                emptyLine(2);
+            }
+            break;
+        case 8:
+            system("clear");
+            int length = Length(&list);
+            emptyLine(1);
+            printf("The list has %d elements.", length);
+            emptyLine(2);
+            break;
+        case 9:
             emptyLine(1);
             printf("Goodbye!");
             emptyLine(2);
             return 0;
             break;
-
         default:
             system(CLEAR);
             printf("Please choose an option from 1-7!");
@@ -153,6 +193,36 @@ void Print(node **head)
     {
         printf("Cannot print empty list!");
     }
+}
+
+node *List(size_t node_count)
+{
+    node *head = (node *)malloc(sizeof(node)); // mallocs the head node
+    node *current = head;                      // sets the stepper node variable initially to head
+    node *temp = NULL;                         // temp node to malloc every new node and assign its address to the previous' "next"
+
+    int i = 0;
+
+    while (i < node_count)
+    {
+        current->value = 2 * i;
+
+        if (i == node_count - 1)
+        {
+            current->next = NULL;
+            break;
+        }
+
+        temp = (node *)malloc(sizeof(node));
+
+        current->next = temp;
+
+        current = current->next;
+
+        i++;
+    }
+
+    return head;
 }
 
 node *Push(node **head, int val)
@@ -215,6 +285,45 @@ node *Insert(node **head, int index, int val)
     prevPos->next = new;
 
     return new;
+}
+
+void Reverse(node **head)
+{
+    node *prev = NULL;
+    node *current = *head;
+    node *next = NULL;
+
+    while (current != NULL)
+    {
+        // set next to current.next
+        next = current->next;
+
+        // set current.next to the previous
+        current->next = prev;
+
+        // set previous to current
+        prev = current;
+
+        // iterate to the next
+        current = next;
+    }
+    // set head to previous(set head to pre-reverse tail)
+    *head = prev;
+}
+
+int Length(node **head)
+{
+    int i = 0;
+    node *current = *head;
+
+    while (current != NULL)
+    {
+        i++;
+
+        current = current->next;
+    }
+
+    return i;
 }
 
 node *Delete(node **head, int index)
